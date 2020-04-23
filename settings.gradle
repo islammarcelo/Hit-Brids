@@ -1,0 +1,2 @@
+rootProject.name='Hit birds'
+include ':app'

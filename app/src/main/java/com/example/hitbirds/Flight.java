@@ -3,6 +3,7 @@ package com.example.hitbirds;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 
 import static com.example.hitbirds.GameView.screenRatioX;
 import static com.example.hitbirds.GameView.screenRatioY;
@@ -11,7 +12,7 @@ public class Flight {
     public boolean isGoingUp;
     int toShoot = 0;
     int x, y, height, width, wingCounter = 0, shootCounter = 1;
-    Bitmap flight1, flight2, shoot1, shoot2, shoot3, shoot4, shoot5;
+    Bitmap flight1, flight2, shoot1, shoot2, shoot3, shoot4, shoot5, dead;
     private GameView gameView;
      Flight(GameView gameView, int screenY, Resources res){
 
@@ -43,6 +44,8 @@ public class Flight {
         shoot4 = Bitmap.createScaledBitmap(shoot4, width, height, false);
         shoot5 = Bitmap.createScaledBitmap(shoot5, width, height, false);
 
+        dead = BitmapFactory.decodeResource(res, R.drawable.dead);
+        dead = Bitmap.createScaledBitmap(dead, width, height, false);
         y = screenY/2;
         x = 64 * (int)screenRatioX;
      }
@@ -76,5 +79,13 @@ public class Flight {
          }
          wingCounter--;
          return flight2;
+    }
+
+    Rect getCollisionShape() {
+        return new Rect(x, y, x + width, y + height);
+    }
+
+    Bitmap getDead(){
+         return dead;
     }
 }
